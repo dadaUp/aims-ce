@@ -8,15 +8,6 @@
  * div命名必须以id-开头，如：id-
  * 缓存数据必须以DATA_开头
  */
-
-$(function() {
-    // 远程获取所有项目列表，TODO bug：只能显示前100条
-    fadeIn(ID_FLOAT, 300);
-    queryProjectDAO(drawProjectDAO);
-    drawModule();
-    fadeOut(ID_FLOAT, 300);
-    getLoginInfoDAO(drawLoginInfoDAO);
-});
 // 渲染模块页面
 function drawModule() {
     var defaultProjectName = getLocalData(DATA_DEF_PROJECT_NAME, -1);

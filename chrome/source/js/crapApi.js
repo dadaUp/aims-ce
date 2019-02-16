@@ -1,8 +1,19 @@
 $(function(){
+    if (getValue(ID_PAGE_NAME) != null && getValue(ID_PAGE_NAME) == "debugPage"){
+        getAdvertisement();
+        // 远程获取所有项目列表，TODO bug：只能显示前100条
+        fadeIn(ID_FLOAT, 300);
+        queryProjectDAO(drawProjectDAO);
+        drawModule();
+        fadeOut(ID_FLOAT, 300);
+        getLoginInfoDAO(drawLoginInfoDAO);
+    }
+
     // drawModuleDAO();
     if ($("#website-url")){
         $("#website-url").val(getWebSiteUrl());
     }
+
     hasInstallPlug = true;
     $("#history-title").click(function(){
         $("#history").removeClass("none");
@@ -46,7 +57,6 @@ $(function(){
         $(".history-div").removeClass("bg-main");
         $(this).addClass("bg-main");
     });
-
 
 
     $("#left-enlarge").click(function(){

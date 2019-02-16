@@ -1,11 +1,33 @@
+/************** 服务器地址 ***************/
 function getWebSiteUrl(){
     return getLocalData('crap-web-site-url', "http://api.crap.cn")
 }
 function setWebSiteUrl(url){
-    saveLocalData('crap-web-site-url', url);
-    $("#set-website-button").text("修改服务器地址成功!");
+    if (url != null && (url.indexOf("http://") == 0 || url.indexOf("https://") == 0)){
+        saveLocalData('crap-web-site-url', url);
+        $("#set-website-button").text("修改服务器地址成功!");
+    } else {
+        $("#set-website-button").text("修改失败，地址不能为空，且必须以 https:// 或 http:// 开头!");
+    }
 }
-
+/************* 插件广告 ****************/
+function getAdvertisement() {
+    try {
+        var result = httpPost(ADVERTISEMENT, null, false, null, null);
+        if (result.text && result.text != '') {
+            setHtml("id-advertisement-text", result.text);
+            showDiv("id-advertisement-text");
+        }
+        if (result.imgUrl && result.imgUrl != '') {
+            setAttr("id-advertisement-img", "src", result.imgUrl);
+        }
+        if (result.href && result.href != '') {
+            setAttr("id-advertisement-href", "href", result.href);
+        }
+    }catch (e){
+        console.error(e);
+    }
+}
 /***********获取本地存储的数据**********/
 function getLocalData(key, def){
     try{
@@ -65,7 +87,10 @@ function setAttr(id, name, value) {
     $("#" + id).attr(name, value);
 }
 function getValue(id) {
-    return $("#" + id).val();
+    if ($("#" + id)){
+        return $("#" + id).val();
+    }
+    return null;
 }
 function setValue(id, val) {
     $("#" + id).val(val);
@@ -77,10 +102,13 @@ function prop(id) {
 
 /********* http *******/
 function httpPost(url, myData, myAsync, callBack, callBackParams){
+    if (url.indexOf("https://") != 0 && url.indexOf("http://") != 0){
+        url = getWebSiteUrl() + url;
+    }
     var result;
     $.ajax({
         type: "POST",
-        url: getWebSiteUrl() + url,
+        url: url,
         async: myAsync,
         data: myData,
         beforeSend: function (request) {
@@ -89,7 +117,6 @@ function httpPost(url, myData, myAsync, callBack, callBackParams){
         },
         complete: function (responseData, textStatus) {
             if (textStatus == "error") {
-                alert("网络异常，Status:" + responseData.status + "\nStatusText:" + responseData.statusText + "\nTextStatus: " + textStatus, 5, "error");
                 result = $.parseJSON("{\"success\":0,\"data\":null,\"error\":{\"code\":\"未知错误\",\"message\":网络异常\"\"}}")
             }
 

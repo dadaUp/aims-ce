@@ -41,8 +41,10 @@ var MY_INTERFACE_LIST_URL = "/user/interface/list.do";
 var MY_INTERFACE_DETAIL_URL = "/user/interface/detail.do";
 var INIT_URL = "/admin/init.do";
 var LOGOUT_URL = "/user/loginOut.do";
+var ADVERTISEMENT = "http://crap.cn/mock/trueExam.do?id=155030837878212000015&cache=true";
 
 /************** html id *****************/
+var ID_PAGE_NAME = "id-page-name";
 var ID_DEF_PROJECT_NAME = "id-def-project-name";
 var ID_USER_NAME = "id-user-name";
 var ID_PROJECT_LIST = "id-project-list";
