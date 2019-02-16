@@ -76,7 +76,7 @@ $(function(){
     $("#set-website-button").click(function(){
         setWebSiteUrl($("#website-url").val());
     });
-    $("#login-button").click(function(){
+    $("#id-login").click(function(){
         window.open(getWebSiteUrl() + "/loginOrRegister.do#/login");
     });
 

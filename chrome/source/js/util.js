@@ -3,7 +3,7 @@ function getWebSiteUrl(){
 }
 function setWebSiteUrl(url){
     saveLocalData('crap-web-site-url', url);
-    $("#set-website-button").text("Change website url success!");
+    $("#set-website-button").text("修改服务器地址成功!");
 }
 
 /***********获取本地存储的数据**********/
