@@ -7,8 +7,8 @@ function queryProjectDAO(callBack) {
 function drawProjectDAO(response) {
     tip(response, 5);
     if (response.success == 0){
-       // alert("错误码：" + response.error.code + "，错误信息" + response.error.message, 5, "error");
-        return;
+       alert("错误码：" + response.error.code + "，错误信息" + response.error.message, 5, "error");
+       return;
     }
     var projectArray = response.data;
     var projectListText = project_list_div;

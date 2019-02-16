@@ -111,13 +111,20 @@ function httpPost(url, myData, myAsync, callBack, callBackParams){
         url: url,
         async: myAsync,
         data: myData,
+        timeout:3000,
         beforeSend: function (request) {
             // 通过body传递参数时后需要设置
             //request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         },
         complete: function (responseData, textStatus) {
-            if (textStatus == "error") {
-                result = $.parseJSON("{\"success\":0,\"data\":null,\"error\":{\"code\":\"未知错误\",\"message\":网络异常\"\"}}")
+            if (textStatus == "error" && responseData.responseText == "") {
+                alert("网络异常，Status:" + responseData.status + "\nStatusText:" + responseData.statusText, 5, "error");
+                result = $.parseJSON("{\"success\":0,\"data\":null,\"error\":{\"code\":\"未知错误\",\"message\":\"网络异常\"}}")
+            }
+
+            else if (textStatus == "error" && responseData.responseText != "") {
+                alert("网络异常，Status:" + responseData.status + "\nStatusText:" + responseData.statusText + "\nResponseText: " + responseData.responseText , 5, "error");
+                result = $.parseJSON("{\"success\":0,\"data\":null,\"error\":{\"code\":\"未知错误\",\"message\":\"" + responseData.responseText + "\"}}")
             }
 
             else if (textStatus == "success") {
@@ -126,6 +133,16 @@ function httpPost(url, myData, myAsync, callBack, callBackParams){
                 if (callBack) {
                     callBack(responseJson, callBackParams);
                 }
+            }
+
+            else if (textStatus == "timeout") {
+                alert("网络超时异常，请检查服务器地址、网络是否正常，Status:" + responseData.status + "\nStatusText:" + responseData.statusText, 5, "error");
+                result = $.parseJSON("{\"success\":0,\"data\":null,\"error\":{\"code\":\"网络超时异常\",\"message\":\"网络超时异常，请检查服务器地址、网络是否正常\"}}")
+            }
+
+            else {
+                alert("未知异常，Status:" + responseData.status + "\nStatusText:" + responseData.statusText, 5, "error");
+                result = $.parseJSON("{\"success\":0,\"data\":null,\"error\":{\"code\":\"未知错误\",\"message\":\"未知错误\"}}")
             }
         }
     });

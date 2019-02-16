@@ -6,7 +6,8 @@ function queryModuleDAO(defaultProjectId, callBack){
 function drawModuleDAO(response){
     tip(response, 5);
     if (response.success == 0){
-        return
+        alert("错误码：" + response.error.code + "，错误信息" + response.error.message, 5, "error");
+        return;
     }
 
     var moduleArray = response.data;
