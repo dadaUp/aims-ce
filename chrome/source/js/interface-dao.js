@@ -26,6 +26,9 @@ function drawInterfaceDAO(response, moduleId) {
             interfaceText = interfaceText.replace("ca_method", "GET");
         }
     }
+    if(interfaces.length == 0){
+        interfaceText = "<div class='interface pl30 pr20 f14 rel'>~尚未创建接口~</div>"
+    }
     setHtml(ID_MODULE_INTERFACE + moduleId, interfaceText);
     setAttr(ID_MODULE_INTERFACE + moduleId, ATTR_HAS_LOAD_INTERFACE, true);
 }

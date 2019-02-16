@@ -18,4 +18,11 @@ function drawProjectDAO(response) {
             "crap-data-project-name='" + project.name + "' crap-data-project-id='" + project.id+ "'>" + project.name + "</a></li>";
     }
     setHtml(ID_PROJECT_LIST, projectListText);
+
+    var defaultProjectName = getLocalData(DATA_DEF_PROJECT_NAME, -1);
+    var defaultProjectId = getLocalData(DATA_DEF_PROJECT_ID, -1);
+    if (projectArray.length > 0 && (defaultProjectId == -1 || defaultProjectName == -1)){
+        saveLocalData(DATA_DEF_PROJECT_ID, projectArray[1].id);
+        saveLocalData(DATA_DEF_PROJECT_NAME, projectArray[1].name);
+    }
 }

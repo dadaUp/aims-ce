@@ -23,6 +23,9 @@ function drawModuleDAO(response){
             moduleText = moduleText.replace("collapse out", "collapse in");
         }
     }
+    if (moduleArray.length == 0){
+        moduleText = "<div class='pl30 p20 f14 C999'>~ 尚未创建模块 ~</div>"
+    }
     $("#modules").html( moduleText );
     if (firstModuleId){
         queryInterfaceDAO(firstModuleId, drawInterfaceDAO, moduleId);

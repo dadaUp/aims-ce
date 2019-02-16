@@ -19,11 +19,13 @@ $(function() {
 });
 // 渲染模块页面
 function drawModule() {
-    var defaultProjectName = getLocalData(DATA_DEF_PROJECT_NAME, null);
-    var defaultProjectId = getLocalData(DATA_DEF_PROJECT_ID, null);
-    if (defaultProjectName && defaultProjectId){
+    var defaultProjectName = getLocalData(DATA_DEF_PROJECT_NAME, -1);
+    var defaultProjectId = getLocalData(DATA_DEF_PROJECT_ID, -1);
+    if (defaultProjectName != -1 && defaultProjectId != -1){
         setHtml(ID_DEF_PROJECT_NAME, defaultProjectName);
         queryModuleDAO(defaultProjectId, drawModuleDAO);
+    } else {
+        setHtml(ID_DEF_PROJECT_NAME, "请点击右侧下拉按钮选着项目");
     }
 }
 

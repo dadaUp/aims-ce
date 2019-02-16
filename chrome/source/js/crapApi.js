@@ -1,5 +1,8 @@
 $(function(){
     // drawModuleDAO();
+    if ($("#website-url")){
+        $("#website-url").val(getWebSiteUrl());
+    }
     hasInstallPlug = true;
     $("#history-title").click(function(){
         $("#history").removeClass("none");
@@ -14,7 +17,6 @@ $(function(){
         $("#history-title").removeClass("bb3");
         $(this).addClass("bb3");
     });
-
 
     $("#history").on("click","div", function() {
         var urlInfo = $.parseJSON( $(this).attr("crap-data") );
@@ -66,6 +68,16 @@ $(function(){
 	});
     $("#open-json").click(function(){
         window.open("json.html")
+    });
+
+    $("#set-web-site").click(function(){
+        window.open("setWebsiteUrl.html")
+    });
+    $("#set-website-button").click(function(){
+        setWebSiteUrl($("#website-url").val());
+    });
+    $("#login-button").click(function(){
+        window.open(getWebSiteUrl() + "/loginOrRegister.do#/login");
     });
 
 	$(".params-headers-table").on("keyup","input", function() {
@@ -220,7 +232,4 @@ $(function(){
                     });
             }
         });
-
-
-	
 })

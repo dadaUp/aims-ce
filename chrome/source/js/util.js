@@ -1,8 +1,16 @@
+function getWebSiteUrl(){
+    return getLocalData('crap-web-site-url', "http://api.crap.cn")
+}
+function setWebSiteUrl(url){
+    saveLocalData('crap-web-site-url', url);
+    $("#set-website-button").text("Change website url success!");
+}
+
 /***********获取本地存储的数据**********/
 function getLocalData(key, def){
     try{
         var value = localStorage[key];
-        if(value){
+        if(value && value != '' && value != 'undefined'){
             return value;
         }
         if (def) {
@@ -17,6 +25,16 @@ function getLocalData(key, def){
         }else{
             return "[]";
         }
+    }
+}
+/*********存储数据至本地***********/
+function saveLocalData(key,value){
+    try{
+        localStorage[key] = value;
+        return true;
+    }catch(e){
+        console.error(e);
+        return false;
     }
 }
 
@@ -56,23 +74,13 @@ function setValue(id, val) {
 function prop(id) {
     $("#" + id).prop("checked",true);
 }
-/*********存储数据至本地***********/
-function saveLocalData(key,value){
-    try{
-        localStorage[key] = value;
-        return true;
-    }catch(e){
-        console.error(e);
-        return false;
-    }
-}
 
 /********* http *******/
 function httpPost(url, myData, myAsync, callBack, callBackParams){
     var result;
     $.ajax({
         type: "POST",
-        url: url,
+        url: getWebSiteUrl() + url,
         async: myAsync,
         data: myData,
         beforeSend: function (request) {

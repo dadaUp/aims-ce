@@ -35,13 +35,12 @@ var DATA_DEF_PROJECT_ID = BASE_PRE + "default_project_id"; // 默认项目ID
 var DATA_DEF_PROJECT_NAME = BASE_PRE + "default_project_name"; // 默认项目名称
 
 /*********** 服务器接口地址 **************/
-var WEB_SITE_URL = "http://api.crap.cn";
-var MY_PROJECT_URL = WEB_SITE_URL + "/user/project/list.do";
-var MY_MODULE_URL = WEB_SITE_URL + "/user/module/list.do";
-var MY_INTERFACE_LIST_URL = WEB_SITE_URL + "/user/interface/list.do";
-var MY_INTERFACE_DETAIL_URL = WEB_SITE_URL + "/user/interface/detail.do";
-var INIT_URL = WEB_SITE_URL + "/admin/init.do";
-var LOGOUT_URL = WEB_SITE_URL + "/user/loginOut.do";
+var MY_PROJECT_URL = "/user/project/list.do";
+var MY_MODULE_URL = "/user/module/list.do";
+var MY_INTERFACE_LIST_URL = "/user/interface/list.do";
+var MY_INTERFACE_DETAIL_URL = "/user/interface/detail.do";
+var INIT_URL = "/admin/init.do";
+var LOGOUT_URL = "/user/loginOut.do";
 
 /************** html id *****************/
 var ID_DEF_PROJECT_NAME = "id-def-project-name";
