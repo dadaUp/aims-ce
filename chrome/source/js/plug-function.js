@@ -142,6 +142,13 @@ function getPramsInUrl(params) {
 }
 var originalResponseText = "";
 function callAjax() {
+    if (getValue(ID_URL).trim() == null || getValue(ID_URL).trim() == ''){
+        $("#response-row").val("Url地址不能为空");
+        $(".response-header .headers").html("");
+        $(".response-header .general").html("");
+        $("#response-pretty").html("");
+        $("#format-row").click();
+    }
     originalResponseText = "";
     var url = getValue(ID_URL).trim().split("?")[0];
     var method = getValue(ID_METHOD);
@@ -157,8 +164,14 @@ function callAjax() {
         url : url,
         async : true,
         data : params,
+        timeout: 3000,
         beforeSend: function(request) {
             getHeaders(request);
+            $("#response-row").val("");
+            $(".response-header .headers").html("");
+            $(".response-header .general").html("");
+            $("#response-pretty").html("");
+            $("#format-row").click();
         },
         complete: function(responseData, textStatus){
             if(textStatus == "success" || (textStatus == "error" && responseData.responseText != "")){
