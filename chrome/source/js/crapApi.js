@@ -85,8 +85,8 @@ $(function(){
     });
     $("#set-website-button").click(function(){
         setWebSiteUrl($("#website-url").val());
-        saveLocalData(DATA_DEF_PROJECT_ID, null);
-        saveLocalData(DATA_DEF_PROJECT_NAME, null);
+        saveLocalData(DATA_DEF_PROJECT_ID, '');
+        saveLocalData(DATA_DEF_PROJECT_NAME, '');
     });
     $("#id-login").click(function(){
         window.open(getWebSiteUrl() + "/loginOrRegister.do#/login");
