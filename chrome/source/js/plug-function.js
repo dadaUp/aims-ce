@@ -159,12 +159,13 @@ function callAjax() {
     }
 
     $("#float").fadeIn(300);
+    var httpTimeout = getHttpTimeout();
     $.ajax({
         type : method,
         url : url,
         async : true,
         data : params,
-        timeout: 5000,
+        timeout: httpTimeout,
         beforeSend: function(request) {
             getHeaders(request);
             $("#response-row").val("");
