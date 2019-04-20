@@ -1,10 +1,35 @@
 /************** 服务器地址 ***************/
+var WEB_SITE_URL = "crap-web-site-url";
+var WEB_HTTP_TIMEOUT = "crap-http-timeout";
+function getHttpTimeout(){
+    try {
+        var httpTimeout = localStorage[WEB_HTTP_TIMEOUT];
+        httpTimeout = parseFloat(httpTimeout);
+        if (httpTimeout && httpTimeout != null && httpTimeout.toString() != "NaN" && httpTimeout > 1000) {
+            return httpTimeout;
+        } else {
+            return 10000;
+        }
+    }catch(e){
+        return 10000;
+    }
+}
+function setHttpTimeout(httpTimeout){
+    httpTimeout = parseFloat(httpTimeout);
+    if (httpTimeout.toString() == "NaN" || httpTimeout < 1000) {
+        $("#http-timeout-button").text("异常! 超时时间必须为数字，必须大于 1000!");
+        return;
+    }
+    localStorage[WEB_HTTP_TIMEOUT] = httpTimeout;
+    $("#http-timeout-button").text("超时时间修改成功!");
+}
+
 function getWebSiteUrl(){
-    return getLocalData('crap-web-site-url', "http://api.crap.cn")
+    return getLocalData(WEB_SITE_URL, "http://api.crap.cn")
 }
 function setWebSiteUrl(url){
     if (url != null && (url.indexOf("http://") == 0 || url.indexOf("https://") == 0)){
-        saveLocalData('crap-web-site-url', url);
+        saveLocalData(WEB_SITE_URL, url);
         $("#set-website-button").text("修改服务器地址成功!");
     } else {
         $("#set-website-button").text("修改失败，地址不能为空，且必须以 https:// 或 http:// 开头!");
@@ -13,7 +38,13 @@ function setWebSiteUrl(url){
 /************* 插件广告 ****************/
 function getAdvertisement() {
     try {
-        var result = httpPost(ADVERTISEMENT, null, true, null, null);
+        httpPost(ADVERTISEMENT, null, true, getAdvertisementCallback, null);
+    }catch (e){
+        console.error(e);
+    }
+}
+function getAdvertisementCallback(result) {
+    try {
         if (result.text && result.text != '') {
             setHtml("id-advertisement-text", result.text);
             showDiv("id-advertisement-text");
@@ -105,13 +136,14 @@ function httpPost(url, myData, myAsync, callBack, callBackParams){
     if (url.indexOf("https://") != 0 && url.indexOf("http://") != 0){
         url = getWebSiteUrl() + url;
     }
+    var httpTimeout = getHttpTimeout();
     var result;
     $.ajax({
         type: "POST",
         url: url,
         async: myAsync,
         data: myData,
-        timeout:3000,
+        timeout: httpTimeout,
         beforeSend: function (request) {
             // 通过body传递参数时后需要设置
             //request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");

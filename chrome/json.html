@@ -10,7 +10,8 @@
 	<link href="source/others/jquery.jsonview.css" rel="stylesheet" type="text/css" />
 </head>
 <body class="BGF5">
-	<div class="h40 CFFF pl20 w shadow fixed z10" style="background:#233050;">
+<input id="id-page-name" type="hidden" value="json">
+<div class="h40 CFFF pl20 w shadow fixed z10" style="background:#233050;">
 		<a href="http://api.crap.cn" target="_blank">
 			<img src="logo.png" class="h30 mt4 ml10 fl">
 		</a>
@@ -21,8 +22,8 @@
 	<!--response-menu-->
 				<div class="response-body p10 pb0 pt50 ">
 					<div class="btn-group" role="group">
-						<button type="button" class="response-menu btn btn-default btn-xs" id="format-row">Row</button>
-						<button type="button" class="response-menu btn btn-default btn-xs" id="format-pretty">Pretty</button>
+						<button type="button" class="response-menu btn btn-default btn-xs" id="format-row">源数据</button>
+						<button type="button" class="response-menu btn btn-default btn-xs" id="format-pretty">格式化</button>
 					</div>
 
 					&nbsp;&nbsp;&nbsp;&nbsp;Json:
@@ -35,7 +36,7 @@
 						<button type="button" class="response-menu response-json btn btn-default btn-xs" crap-data-name="nl2br" crap-data-value="true">自动换行</button>
 					</div>
 
-					<a class="btn btn-default btn-sm" target="_blank" href="https://api.crap.cn/static/help/155032426525701000007.html"><i class="iconfont">&#xe63e; Help</i></a>
+					<a class="btn btn-default btn-sm" target="_blank" href="https://api.crap.cn/static/help/155032426525701000007.html"><i class="iconfont">&#xe63e; 帮助</i></a>
 				</div>
 				<!--response-menu:end-->
 				

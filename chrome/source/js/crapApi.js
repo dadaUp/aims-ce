@@ -1,5 +1,6 @@
 $(function(){
-    if (getValue(ID_PAGE_NAME) != null && getValue(ID_PAGE_NAME) == "debugPage"){
+    var pageName = getValue(ID_PAGE_NAME);
+    if (pageName == "debug"){
         getAdvertisement();
         // 远程获取所有项目列表，TODO bug：只能显示前100条
         fadeIn(ID_FLOAT, 300);
@@ -7,11 +8,9 @@ $(function(){
         drawModule();
         fadeOut(ID_FLOAT, 300);
         getLoginInfoDAO(drawLoginInfoDAO);
-    }
-
-    // drawModuleDAO();
-    if ($("#website-url")){
+    } else if (pageName == "setting"){
         $("#website-url").val(getWebSiteUrl());
+        $("#http-timeout").val(getHttpTimeout());
     }
 
     hasInstallPlug = true;
@@ -81,12 +80,15 @@ $(function(){
     });
 
     $("#set-web-site").click(function(){
-        window.open("setWebsiteUrl.html")
+        window.open("setting.html")
     });
     $("#set-website-button").click(function(){
         setWebSiteUrl($("#website-url").val());
         saveLocalData(DATA_DEF_PROJECT_ID, '');
         saveLocalData(DATA_DEF_PROJECT_NAME, '');
+    });
+    $("#http-timeout-button").click(function(){
+        setHttpTimeout($("#http-timeout").val());
     });
     $("#id-login").click(function(){
         window.open(getWebSiteUrl() + "/loginOrRegister.do#/login");
@@ -111,6 +113,8 @@ $(function(){
         changeBg("btn-default", "btn-main", "response-menu",this);
         $("#response-row").val(rowData);
         responseShow("response-row");
+        $('#response-row').removeAttr("readonly");
+        originalResponseText = "";
     });
 
     $("#format-pretty").click(function(){
@@ -125,6 +129,7 @@ $(function(){
             $("#response-row").val(rowData);
         }
         changeBg("btn-default", "btn-main", "response-menu",this);
+        $('#response-row').attr("readonly","readonly");
         responseShow("response-row");
     });
 
