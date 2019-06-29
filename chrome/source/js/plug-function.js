@@ -175,36 +175,40 @@ function callAjax() {
             $("#format-row").click();
         },
         complete: function(responseData, textStatus){
+
+            try {
+                var rootDomainStr = getRootDomain(url);
+                chrome.cookies.getAll({domain: rootDomainStr}, function (cookies) {
+                    $(".response-cookie .table tr").empty();
+                    $(".response-cookie .table").append("<tr class='fb'><td>Name</td> <td>Value</td> <td>Path</td><td>Domain</td><td>ExpirationDate</td></tr>");
+                    var a = document.createElement('a');
+                    a.href = url;
+                    for (i = 0; i < cookies.length; i++) {
+                        if (("." + a.host).endWith(cookies[i].domain)) {
+                            var cookieStr = "<tr>";
+                            cookieStr += "<td class='w-p-10 break-word'>" + cookies[i].name + "</td>";
+                            cookieStr += "<td class='w-p-30 break-word'>" + cookies[i].value + "</td>";
+                            cookieStr += "<td class='w-p-20 break-word'>" + cookies[i].path + "</td>";
+                            cookieStr += "<td class='w-p-20 break-word'>" + cookies[i].domain + "</td>";
+                            cookieStr += "<td class='w-p-20 break-word'>" + cookies[i].expirationDate + "</td>";
+                            cookieStr += "</tr>";
+                            $(".response-cookie .table").append(cookieStr)
+                        }
+                    }
+                });
+                var head = responseData.getAllResponseHeaders().toString().huanhang();
+                $(".response-header .headers").html(head);
+                var general ="Request URL: " + url +"<br>Request Method: " + method +"<br>Status Code: " + responseData.status;
+                $(".response-header .general").html(general);
+            }catch (e){}
+
+
             if(textStatus == "success" || (textStatus == "error" && responseData.responseText != "")){
                 try{
                     originalResponseText = responseData.responseText;
                     var data = responseData.responseText;
                     $("#response-row").val(data);
-                    var head = responseData.getAllResponseHeaders().toString().huanhang();
-                    $(".response-header .headers").html(head);
-                    var general ="Request URL: " + url +"<br>Request Method: " + method +"<br>Status Code: " + responseData.status;
-                    $(".response-header .general").html(general);
                     $("#response-pretty").html("");
-
-                    var rootDomainStr =getRootDomain(url);
-                    chrome.cookies.getAll({domain: rootDomainStr}, function(cookies){
-                        $(".response-cookie .table tr").empty();
-                        $(".response-cookie .table").append("<tr class='fb'><td>Name</td> <td>Value</td> <td>Path</td><td>Domain</td><td>ExpirationDate</td></tr>");
-                        var a =  document.createElement('a');
-                        a.href = url;
-                        for(i=0; i<cookies.length;i++) {
-                            if( ("."+a.host).endWith(cookies[i].domain) ){
-                                var cookieStr = "<tr>";
-                                cookieStr += "<td class='w-p-10 break-word'>" + cookies[i].name + "</td>";
-                                cookieStr += "<td class='w-p-30 break-word'>"  + cookies[i].value + "</td>";
-                                cookieStr += "<td class='w-p-20 break-word'>"  + cookies[i].path + "</td>";
-                                cookieStr += "<td class='w-p-20 break-word'>" + cookies[i].domain +"</td>";
-                                cookieStr += "<td class='w-p-20 break-word'>" + cookies[i].expirationDate +"</td>";
-                                cookieStr += "</tr>";
-                                $(".response-cookie .table").append(cookieStr)
-                            }
-                        }
-                    });
                 }catch(e){
                     $("#format-row").click();
                 }
@@ -216,7 +220,8 @@ function callAjax() {
                     $("#format-row").click();
                 }
             }else{
-                $("#response-row").val("textStatus: " + textStatus +"\n\n There was an error connecting to " + url);
+                $("#response-row").val("-----ResponseText 返回数据-----\n\n" + responseData.responseText
+                    +"\n\n-------提示 ：发现异常，请检查地址、网络、返回格式是否正常-------");
                 $("#format-row").click();
             }
             $("#float").fadeOut(300);

@@ -8,7 +8,7 @@
 		"64": "logo.png",
 		"128": "logo.png"
 	},
-	"browser_action": { 
+    "browser_action": {
         "default_icon": "logo.png",
         "default_title": "CrapApi",  
         "default_popup": "index.html"
@@ -24,7 +24,10 @@
 			"matches":["http://*/*","https://*/*"],
 			"js":["source/others/jquery-1.9.1.min.js","source/js/content_scripts.js"]
 		}
-	],"background": {
-        "page": "background.html"
+	],
+    "background": {
+      "persistent":true,
+      "scripts":["background.js","source/others/jquery-1.9.1.min.js"]
+      // "page": "background.html"
     }
 }
