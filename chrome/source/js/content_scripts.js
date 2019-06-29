@@ -207,14 +207,14 @@ document.addEventListener('result.complete', function (params) {
         try {
             var txtObj = JSON.parse(data);
             data = JSON.stringify(txtObj, null, 5);
-            $("#crap-debug-result").val(data);
+            $("#crap-debug-result-textarea").val(data);
         } catch (e) {
-            $("#crap-debug-result").val(data);
+            $("#crap-debug-result-textarea").val(data);
         }
         $("#crap-debug-headers").html(headerInfo + "\n ---------------------------------\n" + headers);
     }else{
         $("#crap-debug-headers").html(headerInfo + "\n ----------------响应头信息---------------\n" + headers);
-        $("#crap-debug-result").val("-----ResponseText 返回数据-----\n\n" + responseText
+        $("#crap-debug-result-textarea").val("-----ResponseText 返回数据-----\n\n" + responseText
             +"\n\n-------提示 ：发现异常，请检查地址、网络、返回格式是否正常-------");
     }
     $("#float").fadeOut(300);
