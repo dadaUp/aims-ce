@@ -28,6 +28,5 @@
     "background": {
       "persistent":true,
       "scripts":["background.js","source/others/jquery-1.9.1.min.js"]
-      // "page": "background.html"
     }
 }
