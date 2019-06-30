@@ -220,8 +220,9 @@ function callAjax() {
                     $("#format-row").click();
                 }
             }else{
-                $("#response-row").val("-----ResponseText 返回数据-----\n\n" + responseData.responseText
-                    +"\n\n-------提示 ：发现异常，请检查地址、网络、返回格式是否正常-------");
+                $("#response-row").val(
+                    "-------提示 ：发现异常，请检查地址、网络、返回格式是否正常-------\n" +
+                    "-------ResponseText 返回数据-------\n\n" + responseData.responseText);
                 $("#format-row").click();
             }
             $("#float").fadeOut(300);
