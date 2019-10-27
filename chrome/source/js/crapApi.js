@@ -211,10 +211,10 @@ $(function(){
 
   // 插件调试send
   $("#send").click(function(){
-	  if( showBulkHeaders ){
+	  if( getAttr(ID_HEADERS_BULK_EDIT, ATTR_SHOW_BULK) == _true){
 		 $("#headers-bulk-edit-div .key-value-edit").click();
 	  }
-	  if( showBulkParams ){
+	  if( getAttr(ID_PARAMS_BULK_EDIT, ATTR_SHOW_BULK) == _true ){
 		 $("#params-bulk-edit-div .key-value-edit").click();
 	  }
       callAjax();

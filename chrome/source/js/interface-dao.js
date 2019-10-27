@@ -7,6 +7,11 @@ function getInterfaceDAO(id) {
     return httpPost(MY_INTERFACE_DETAIL_URL, {"id" : id}, false, null, null);
 }
 
+/**
+ * 根据模块ID，渲染模块下的所有接口
+ * @param response
+ * @param moduleId
+ */
 function drawInterfaceDAO(response, moduleId) {
     var interfaceText = "";
     var interfaces = response.data;

@@ -68,8 +68,12 @@
 
 			<div class="cb"></div>
 
+			<!-- 接口标题 -->
+			<span class="r10"></span>
+
 			<!--参数、头、相应结果-->
-			<div class="w h mt10 rel">
+			<div class="w h mt10 rel" id="id-interface-div">
+
 				<!--接口标题-->
 				<div class="mt10 ml10 fb bl3 f14 pl10 tl pr10">
 					<input type="text" class="form-control b0 r2 BGF5 p3 h27" id="id-interface-name" placeholder="请输入接口名"/>
@@ -116,7 +120,7 @@
 								</td>
 								<td class="p5" colspan="2">
 									 Value
-									 <a class="bulk-edit fr mr20 color-main cursor" crap-data-header-or-param="headers">Bulk Edit</a>
+									 <a id="id-headers-bulk-edit" class="bulk-edit fr mr20 color-main cursor" crap-data-header-or-param="headers">Bulk Edit</a>
 								</td>
 							</tr>
 						</thead>
@@ -133,10 +137,10 @@
 						</tbody>
                     </table>
 					
-					<div id="headers-bulk-edit-div" class=" f12 none">
+					<div id="headers-bulk-edit-div" class="f12 none">
 							<a class="key-value-edit fr  mr20 color-main cursor fb" crap-data-header-or-param="headers">Key-Value Edit</a>
 							<textarea id="id-headers-bulk-value" class="form-control w BGFFF min-h100 max-w" placeholder="key:value"></textarea>
-						</div>
+					</div>
                 </div>
 				<!--请求头-->
 
@@ -167,7 +171,7 @@
 									</td>
 									<td class="p5" colspan="2">
 										 Value
-										 <a class="bulk-edit fr mr20 color-main cursor" crap-data-header-or-param="params">Bulk Edit</a>
+										 <a id="id-params-bulk-edit" class="bulk-edit fr mr20 color-main cursor" crap-data-header-or-param="params">Bulk Edit</a>
 									</td>
 								</tr>
 							</thead>

@@ -1,5 +1,9 @@
 var leftEnlarge = true;
 
+/**
+ * 是否允许自定义参数
+ * @returns {boolean}
+ */
 function hasConsumer() {
     if( getValue(ID_METHOD) == "POST" || getValue(ID_METHOD) == "PUT"){
         return true;

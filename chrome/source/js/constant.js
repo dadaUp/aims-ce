@@ -58,13 +58,22 @@ var ID_URL = "id-url";
 var ID_INTERFACE_ID = "id-interface-id";
 var ID_INTERFACE_NAME = "id-interface-name";
 var ID_MODULE_ID = "id-module-id";
-var ID_HEADERS_BULK_VALUE = "id-headers-bulk-value";
 var ID_METHOD = "id-method";
 var ID_PARAM_TYPE = "id-param-type";
+
 var ID_PARAMS_BULK_VALUE = "id-params-bulk-value";
+var ID_HEADERS_BULK_VALUE = "id-headers-bulk-value";
+
+var ID_PARAMS_BULK_EDIT = "id-params-bulk-edit";
+var ID_HEADERS_BULK_EDIT = "id-headers-bulk-edit";
+
 var ID_CUSTOMER_TYPE = "id-customer-type";
 var ID_CONTENT_TYPE = "id-content-type";
 var ID_CUSTOMER_TYPE_SELECT = "id-customer-type-select";
+
+
+
+
 
 /************* attr ***************/
 var BASE_ATTR_PRE = "crap-data-";
@@ -73,4 +82,10 @@ var ATTR_PROJECT_NAME = BASE_ATTR_PRE + "project-name";
 var ATTR_HAS_LOAD_INTERFACE = BASE_ATTR_PRE + "has-load-interface";
 var ATTR_MODULE_ID = BASE_ATTR_PRE + "module-id";
 var ATTR_INTERFACE_ID = BASE_ATTR_PRE + "interface-id";
-var ATTR_HEADER_OR_PARAM = BASE_ATTR_PRE + "header-or-param";
+var ATTR_SHOW_BULK= BASE_ATTR_PRE + "show-bulk";
+var ATTR_HEADER_OR_PARAM= BASE_ATTR_PRE + "header-or-param"
+
+/*************常量***************/
+var _true = "true";
+var _false ="false";
+var _id = "id";

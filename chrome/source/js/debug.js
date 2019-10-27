@@ -87,19 +87,14 @@ $("#modules").on("click",".interface", function() {
 
 });
 
-// 当前是否显示批量编辑
-var showBulkParams = false;
-var showBulkHeaders = false;
-
 // 批量编辑
 $(".bulk-edit").click(function(){
+    /**
+     * 标记状态为显示状态
+     */
+    setAttr($(this).attr(_id), ATTR_SHOW_BULK, _true);
+
     var preId = $(this).attr(ATTR_HEADER_OR_PARAM);
-    if( preId == "headers"){
-        showBulkHeaders = true;
-    }
-    if( preId == "params"){
-        showBulkParams = true;
-    }
     $("#"+preId+"-table").addClass("none");
     $("#"+preId+"-bulk-edit-div").removeClass("none");
     var bulkParams = "";
@@ -124,13 +119,14 @@ $(".bulk-edit").click(function(){
 // key-value编辑
 $(".key-value-edit").click(function(){
     var preId = $(this).attr(ATTR_HEADER_OR_PARAM);
+
     var bulkParams = "";
     if( preId == "headers"){
-        showBulkHeaders = false;
+        setAttr(ID_HEADERS_BULK_EDIT, ATTR_SHOW_BULK, _false);
         bulkParams = getValue(ID_HEADERS_BULK_VALUE);
     }
     if( preId == "params"){
-        showBulkParams = false;
+        setAttr(ID_PARAMS_BULK_EDIT, ATTR_SHOW_BULK, _false);
         bulkParams = getValue(ID_PARAMS_BULK_VALUE);
     }
     $("#"+preId+"-table").removeClass("none");
