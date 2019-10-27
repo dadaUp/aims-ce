@@ -46,51 +46,23 @@ $("#modules").on("click",".panel-heading", function() {
 
 
 // 点击接口，渲染接口数据
+var inter = {};
 $("#modules").on("click",".interface", function() {
-    // 将当前页面数据存入变量，便于下次恢复
+    selectInterface($(this).attr(ATTR_INTERFACE_ID));
+});
 
-    $("#" + ID_INTERFACE_DIV).removeClass("none");
-    $("#" + ID_WELCOME).addClass("none");
+$("#id-interface-titles").on("click",".close-interface", function() {
+    $("#" + ID_INTERFACE_DIV).addClass("none");
+    $("#" + ID_WELCOME).removeClass("none");
+    var id = ID_INTERFACE_TITLE + $(this).attr(ATTR_INTERFACE_ID);
+    $("#" + id).remove();
+});
 
-    var interfaceId = $(this).attr(ATTR_INTERFACE_ID);
-    var inter = adapterGetInterface(getInterfaceDAO(interfaceId));
-
-    setValue(ID_URL, inter.url);
-    setValue(ID_INTERFACE_ID, inter.id)
-    setValue(ID_MODULE_ID, inter.moduleId)
-    setValue(ID_INTERFACE_NAME, handerStr(inter.name));
-    if (inter.method.indexOf("POST") >= 0){
-        setValue(ID_METHOD, 'POST');
-    }else if (inter.method.indexOf("GET") >= 0){
-        setValue(ID_METHOD, 'GET');
-    }else{
-        setValue(ID_METHOD, inter.method);
-    }
-
-    $("#" + ID_METHOD).change();
-    // TODO 服务器支持paramType 存储
-    // key-value键值对输入方法
-    if($.inArray(inter.paramType, customerTypes) == -1){
-        // 选中参数输入table
-        prop(ID_PARAM_TYPE);
-        setValue(ID_PARAMS_BULK_VALUE, inter.params);
-        $("#params-bulk-edit-div .key-value-edit").click();
-    }
-    // 自定义参数输入
-    else{
-        prop(ID_CUSTOMER_TYPE);
-        // 下拉选择 id-customer-type-select
-        $("#" + ID_CUSTOMER_TYPE_SELECT).val(inter.paramType);
-        $("#" + ID_CUSTOMER_TYPE_SELECT).change();
-        $("#customer-value").val(inter.params);
-    }
-    setValue(ID_HEADERS_BULK_VALUE, inter.headers);
-    $("#headers-bulk-edit-div .key-value-edit").click();
-    $("input[name='param-type']").change();
-
+$("#id-interface-titles").on("click",".interface-title-name", function() {
     $(".interface").removeClass("bg-main");
-    $(this).addClass("bg-main");
+    $(".interface-title").removeClass("bg-main");
 
+    selectInterface($(this).attr(ATTR_INTERFACE_ID));
 });
 
 // 批量编辑
@@ -159,3 +131,69 @@ $(".key-value-edit").click(function(){
     }
     $("#"+preId+"-table tbody").append(paramsTr);
 });
+
+function selectInterface(interfaceId) {
+
+    // 切换页面
+    $("#" + ID_INTERFACE_DIV).removeClass("none");
+    $("#" + ID_WELCOME).addClass("none");
+
+    var interfaceTitleDivId = ID_INTERFACE_TITLE + interfaceId;
+
+    // 将当前页面数据存入变量，便于下次恢复
+
+    $(".interface-title").removeClass("bg-main");
+    if ($("#" + interfaceTitleDivId).length > 0){
+        $("#" + interfaceTitleDivId).addClass("bg-main");
+
+        // 将当前页面数据存储至db
+        inter = getInterfaceFromHtml(inter);
+        saveLocalData(DATA_INTERFACE_TEMP + $("#" + ID_INTERFACE_ID).val(), JSON.stringify(inter));
+
+        inter = getLocalJson(DATA_INTERFACE_TEMP + interfaceId, "{}");
+
+    } else {
+        inter = adapterGetInterface(getInterfaceDAO(interfaceId));
+        saveLocalData(DATA_INTERFACE_TEMP + interfaceId, JSON.stringify(inter));
+
+        var interTitleHtmlList = $("#" + ID_INTERFACE_TITLES).html();
+        $("#" + ID_INTERFACE_TITLES).html(interTitleHtmlList + (interfaceTitleDiv.replace(/ca_id/g,inter.id).replace(/ca_name/g,inter.name)));
+    }
+
+
+    setValue(ID_URL, inter.url);
+    setValue(ID_INTERFACE_ID, inter.id)
+    setValue(ID_MODULE_ID, inter.moduleId)
+    setValue(ID_INTERFACE_NAME, handerStr(inter.name));
+    if (inter.method.indexOf("POST") >= 0){
+        setValue(ID_METHOD, 'POST');
+    }else if (inter.method.indexOf("GET") >= 0){
+        setValue(ID_METHOD, 'GET');
+    }else{
+        setValue(ID_METHOD, inter.method);
+    }
+
+    $("#" + ID_METHOD).change();
+    // TODO 服务器支持paramType 存储
+    // key-value键值对输入方法
+    if($.inArray(inter.paramType, customerTypes) == -1){
+        // 选中参数输入table
+        prop(ID_PARAM_TYPE);
+        setValue(ID_PARAMS_BULK_VALUE, inter.params);
+        $("#params-bulk-edit-div .key-value-edit").click();
+    }
+    // 自定义参数输入
+    else{
+        prop(ID_CUSTOMER_TYPE);
+        // 下拉选择 id-customer-type-select
+        $("#" + ID_CUSTOMER_TYPE_SELECT).val(inter.paramType);
+        $("#" + ID_CUSTOMER_TYPE_SELECT).change();
+        $("#customer-value").val(inter.params);
+    }
+    setValue(ID_HEADERS_BULK_VALUE, inter.headers);
+    $("#headers-bulk-edit-div .key-value-edit").click();
+    $("input[name='param-type']").change();
+
+    $(".interface").removeClass("bg-main");
+    $("#" + ID_INTERFACE_MENU + interfaceId).addClass("bg-main");
+}

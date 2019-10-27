@@ -21,7 +21,7 @@ input{
     color:#3275e4;
 }
 .bg-main {
-    background-color:#3275e4;
+    background-color:#3275e4!important;
     color: #ffffff!important;
 }
 .form-control {
@@ -243,3 +243,12 @@ pre, form, fieldset, legend, button, input, textarea, th, td {
     font-family: "Lantinghei SC", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif;
 }
 
+.badge-def{
+    font-size: 12px;
+    font-weight: 200;
+    background-color: #dddddd;
+    color: #666666;
+    padding: 4px 10px!important;
+    margin-right:10px;
+    cursor: pointer;
+}

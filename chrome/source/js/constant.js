@@ -2,13 +2,13 @@
 var paramsTr = "<tr class='last'>";
 paramsTr += "<td><input type='text' class='form-control' data-stage='key'></td>";
 paramsTr += "<td><input type='text' class='form-control' data-stage='value'></td>";
-paramsTr += "<td class='w20'><i class='iconfont'>&#xe63f;</i></td>";
+paramsTr += "<td class='w20'><i class='iconfont'>&#xe69a;</i></td>";
 paramsTr += "</tr>";
 
 var moduleDiv = "<div class='panel panel-info no-radius b0 mt0 left-menu-border-top'>";
 moduleDiv += "      <div class='panel-heading no-radius rel' data-parent='#modules' crap-data-module-id='ca_moduleId'>";
 moduleDiv += "          <div class='cursor' data-toggle='collapse' data-parent='#modules' href='#id-panel-ca_moduleId'>";
-moduleDiv += "              <i class='iconfont color-main f16'>&#xe628;</i>&nbsp;&nbsp;  ca_moduleName";
+moduleDiv += "              <i class='iconfont color-main f16'>&#xe83b;</i>&nbsp;&nbsp;  ca_moduleName";
 moduleDiv += "          </div>";
 moduleDiv += "      </div>";
 moduleDiv += "      <div id='id-panel-ca_moduleId' class='panel-collapse BGEEE collapse out'>";
@@ -16,13 +16,20 @@ moduleDiv += "          <div id='id-module-interface-ca_moduleId' class='panel-b
 moduleDiv += "       </div>";
 moduleDiv += "   </div>";
 
-var interfaceDiv = "<div crap-data-interface-id='ca_id' class='interface pl30 pr20 rel' title='ca_name'>";
+
+var ID_INTERFACE_MENU = "id-interface-menu-id-";
+var interfaceDiv = "<div crap-data-interface-id='ca_id' id='" + ID_INTERFACE_MENU + "ca_id' class='interface pl30 pr20 rel' title='ca_name'>";
 interfaceDiv += "		<i class='iconfont ca_method'>ca_methodIcon</i>&nbsp;&nbsp;ca_name";
 interfaceDiv += "	</div>";
 
 var project_list_div = "<li><a href='javascript:void(0)' class='pl10 pr10'>切换项目</a></li>";
 project_list_div += "<li role='separator' class='divider pl10 pr10'></li>";
 
+var ID_INTERFACE_TITLE = "id-interface-title-";
+var interfaceTitleDiv = "<span id='" + ID_INTERFACE_TITLE + "ca_id' crap-data-interface-id='ca_id' class='interface-title r10 BCEEE badge badge-def bg-main'>" +
+    "<span class='interface-title-name' crap-data-interface-id='ca_id'>ca_name</span>" +
+    " <i class='iconfont close-interface' crap-data-interface-id='ca_id'>&#xe69a;</i>" +
+    " </span>"
 // Custom param types
 var customerTypes = ["text/plain", "application/json", "application/xml"];
 
@@ -33,6 +40,9 @@ var DATA_MODULE = BASE_PRE + "module"; // 模块列表
 var DATA_INTERFACE = BASE_PRE + "interface_"; // 接口列表
 var DATA_DEF_PROJECT_ID = BASE_PRE + "default_project_id"; // 默认项目ID
 var DATA_DEF_PROJECT_NAME = BASE_PRE + "default_project_name"; // 默认项目名称
+
+var DATA_INTERFACE_TEMP = BASE_PRE + "interface_temp_"; // 接口本地缓存数据
+
 
 /*********** 服务器接口地址 **************/
 var MY_PROJECT_URL = "/user/project/list.do";
@@ -72,6 +82,8 @@ var ID_CONTENT_TYPE = "id-content-type";
 var ID_CUSTOMER_TYPE_SELECT = "id-customer-type-select";
 
 var ID_INTERFACE_DIV = "id-interface-div";
+var ID_INTERFACE_TITLES = "id-interface-titles";
+
 var ID_WELCOME = "id-welcome";
 
 

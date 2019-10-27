@@ -7,6 +7,22 @@ function getInterfaceDAO(id) {
     return httpPost(MY_INTERFACE_DETAIL_URL, {"id" : id}, false, null, null);
 }
 
+function getInterfaceFromHtml(inter) {
+    inter.url = getValue(ID_URL)
+    inter.name = getValue(ID_INTERFACE_NAME);
+    inter.method = getValue(ID_METHOD);
+    inter.paramType = $('input:radio[name="param-type"]:checked').val()
+
+    // 参数
+    inter.params = getBulkParams();
+    if(hasConsumer() && $.inArray($('input:radio[name="param-type"]:checked').val(), customerTypes) != -1){
+        inter.params = $("#customer-value").val();
+    }
+
+    // 请求头
+    inter.headers = getBulkHeaders();
+    return inter;
+}
 /**
  * 根据模块ID，渲染模块下的所有接口
  * @param response

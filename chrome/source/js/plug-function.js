@@ -127,6 +127,52 @@ function getParams(){
     return (data.length > 0 ? data.substr(1) : data);
 }
 
+function getBulkParams(){
+    var texts = $("#params-div input[type='text']");
+    var data = "";
+    // 获取所有文本框
+    var key = "";
+
+    $.each(texts, function(i, val) {
+        try {
+            if(val.getAttribute("data-stage")  == "value"){
+                if( key != "" || val.value != "") {
+                    data += key + ":" + val.value + "\n";
+                }
+            }else if(val.getAttribute("data-stage")  == "key"){
+                key = val.value;
+            }
+        } catch (ex) {
+            console.warn(e);
+            alert(ex);
+        }
+    });
+    return data;
+}
+
+function getBulkHeaders(){
+    var texts = $("#headers-div input[type='text']");
+    var data = "";
+    // 获取所有文本框
+    var key = "";
+
+    $.each(texts, function(i, val) {
+        try {
+            if(val.getAttribute("data-stage")  == "value"){
+                if( key != "" || val.value != "") {
+                    data += key + ":" + val.value + "\n";
+                }
+            }else if(val.getAttribute("data-stage")  == "key"){
+                key = val.value;
+            }
+        } catch (ex) {
+            console.warn(e);
+            alert(ex);
+        }
+    });
+    return data;
+}
+
 function getPramsInUrl(params) {
     var urlParamsStr = "";
     params = "&" + params;
@@ -158,7 +204,7 @@ function callAjax() {
     var method = getValue(ID_METHOD);
     var params =  getPramsInUrl(getParams());
     // 自定义参数
-    if(hasConsumer && $.inArray($('input:radio[name="param-type"]:checked').val(), customerTypes) != -1){
+    if(hasConsumer() && $.inArray($('input:radio[name="param-type"]:checked').val(), customerTypes) != -1){
         params = $("#customer-value").val();
     }
 
