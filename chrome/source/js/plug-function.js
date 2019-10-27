@@ -208,7 +208,7 @@ function callAjax() {
         params = $("#customer-value").val();
     }
 
-    $("#float").fadeIn(300);
+    $("#" + ID_FLOAT).fadeIn(300);
     var httpTimeout = getHttpTimeout();
     $.ajax({
         type : method,
@@ -275,7 +275,7 @@ function callAjax() {
                     "-------ResponseText 返回数据-------\n\n" + responseData.responseText);
                 $("#format-row").click();
             }
-            $("#float").fadeOut(300);
+            $("#" + ID_FLOAT).fadeOut(300);
         }
     });
 

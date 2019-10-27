@@ -524,6 +524,13 @@
       "unicode_decimal": 59515
     },
     {
+      "icon_id": "6361501",
+      "name": "sj_json",
+      "font_class": "sj_json",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
       "icon_id": "6874043",
       "name": "用户管理",
       "font_class": "mgt-user",
