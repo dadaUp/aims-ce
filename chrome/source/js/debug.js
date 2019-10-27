@@ -113,7 +113,7 @@ $(".bulk-edit").click(function(){
             }
         } catch (ex) { }
     });
-    $("#"+preId+"-bulk").val(bulkParams);
+    $("#id-"+preId+"-bulk-value").val(bulkParams);
 });
 
 // key-value编辑
