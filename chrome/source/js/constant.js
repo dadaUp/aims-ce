@@ -71,6 +71,9 @@ var ID_CUSTOMER_TYPE = "id-customer-type";
 var ID_CONTENT_TYPE = "id-content-type";
 var ID_CUSTOMER_TYPE_SELECT = "id-customer-type-select";
 
+var ID_INTERFACE_DIV = "id-interface-div";
+var ID_WELCOME = "id-welcome";
+
 
 
 

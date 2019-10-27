@@ -44,8 +44,14 @@ $("#modules").on("click",".panel-heading", function() {
     }
 });
 
+
 // 点击接口，渲染接口数据
 $("#modules").on("click",".interface", function() {
+    // 将当前页面数据存入变量，便于下次恢复
+
+    $("#" + ID_INTERFACE_DIV).removeClass("none");
+    $("#" + ID_WELCOME).addClass("none");
+
     var interfaceId = $(this).attr(ATTR_INTERFACE_ID);
     var inter = adapterGetInterface(getInterfaceDAO(interfaceId));
 

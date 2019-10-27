@@ -1,5 +1,5 @@
-//点击luceneSearch时执行以下代码
 $(function(){
+    // 网页接口调试，标记为已安装插件
     if ($("#hasInstallPlug")) {
         $("#hasInstallPlug").val(true);
         $("#has-plug").removeClass("none");

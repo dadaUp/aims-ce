@@ -1,6 +1,6 @@
 /*******网路请求*******/
 function queryProjectDAO(callBack) {
-    httpPost(MY_PROJECT_URL, {"myself":true, "pageSize": 100}, true, callBack);
+    httpPost(MY_PROJECT_URL, {"myself":true, "pageSize": 50}, true, callBack);
 }
 
 // 渲染项目列表方法

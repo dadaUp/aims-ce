@@ -2,7 +2,7 @@ $(function(){
     var pageName = getValue(ID_PAGE_NAME);
     if (pageName == "debug"){
         getAdvertisement();
-        // 远程获取所有项目列表，TODO bug：只能显示前100条
+        // 远程获取所有项目列表，TODO bug：只能显示前50条
         fadeIn(ID_FLOAT, 300);
         queryProjectDAO(drawProjectDAO);
         drawModule();
@@ -13,7 +13,6 @@ $(function(){
         $("#http-timeout").val(getHttpTimeout());
     }
 
-    hasInstallPlug = true;
     $("#history-title").click(function(){
         $("#history").removeClass("none");
         $("#modules").addClass("none");
