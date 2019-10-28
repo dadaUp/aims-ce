@@ -28,6 +28,10 @@ $(function(){
     });
 
     $("#history").on("click","div", function() {
+        // 切换页面
+        $("#" + ID_INTERFACE_DIV).removeClass("none");
+        $("#" + ID_WELCOME).addClass("none");
+
         var urlInfo = $.parseJSON( $(this).attr("crap-data") );
         setValue(ID_URL, urlInfo.url);
         setValue(ID_INTERFACE_ID, "-1");
