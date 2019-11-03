@@ -30,7 +30,7 @@ function drawModuleDAO(response, defaultProjectId){
     }
 
     // -1000代表非模块下的接口
-    moduleText += moduleDiv.replace(/ca_moduleId/g,"-1000").replace(/ca_moduleName/g,"其他(非模块下的接口)").replace(/ca_projectId/g, defaultProjectId);
+    moduleText += moduleDiv.replace(/ca_moduleId/g,"-1000").replace(/ca_moduleName/g,"其他(无模块接口)").replace(/ca_projectId/g, defaultProjectId);
     $("#modules").html( moduleText );
     if (firstModuleId){
         queryInterfaceDAO(projectId, firstModuleId, drawInterfaceDAO);
