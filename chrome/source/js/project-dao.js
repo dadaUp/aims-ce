@@ -5,7 +5,7 @@ function queryProjectDAO(callBack) {
 
 // 渲染项目列表方法
 function drawProjectDAO(response) {
-    tip(response, 5);
+    tip(response, 5, "项目加载成功！");
     if (response.success == 0){
         alert("错误：" + response.error.message + "（" + response.error.code + "）", 5, "error");
         return;

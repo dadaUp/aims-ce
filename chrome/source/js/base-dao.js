@@ -16,7 +16,7 @@ $("#" + ID_LOGOUT).click(function(){
 });
 
 function drawLogoutDAO(response) {
-    tip(response, 5);
+    tip(response, 5, "退出成功！");
     if (response.success == 1){
         hiddenDiv(ID_USER_NAME);
         showDiv(ID_LOGIN);
