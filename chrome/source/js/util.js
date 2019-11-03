@@ -164,7 +164,9 @@ function httpPost(url, myData, myAsync, callBack, callBackParams){
             else if (textStatus == "success") {
                 var responseJson = $.parseJSON(responseData.responseText);
                 result = responseJson;
-                if (callBack) {
+                if (result.success == 0){
+                    alert("错误：" + result.error.message + "（" + result.error.code + "）", 5, "error");
+                } else if(callBack) {
                     callBack(responseJson, callBackParams);
                 }
             }
@@ -184,6 +186,9 @@ function httpPost(url, myData, myAsync, callBack, callBackParams){
 
     $.when(deferred.promise()).then(function(data){
         $("#" + ID_FLOAT).fadeOut(300);
+        if (result.success == 0){
+            data = null;
+        }
         result = data;
     });
     return result;

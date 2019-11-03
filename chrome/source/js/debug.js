@@ -154,6 +154,9 @@ function selectInterface(interfaceId) {
 
     } else {
         inter = adapterGetInterface(getInterfaceDAO(interfaceId));
+        if (inter == null){
+            return;
+        }
         saveLocalData(DATA_INTERFACE_TEMP + interfaceId, JSON.stringify(inter));
 
         var interTitleHtmlList = $("#" + ID_INTERFACE_TITLES).html();

@@ -5,10 +5,6 @@ function queryModuleDAO(defaultProjectId, callBack){
 // 渲染模块列表
 function drawModuleDAO(response){
     tip(response, 5, "模块加载成功！");
-    if (response.success == 0){
-        alert("错误：" + response.error.message + "（" + response.error.code + "）", 5, "error");
-        return;
-    }
 
     var moduleArray = response.data;
     var moduleText = "";

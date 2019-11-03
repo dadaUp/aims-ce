@@ -1,7 +1,8 @@
 function adapterGetInterface(interfaceInfo) {
-    if (!interfaceInfo){
-        return getNewInterface();
+    if (interfaceInfo == null){
+        return null;
     }
+
     interfaceInfo = interfaceInfo.data;
     var paramStr = interfaceInfo.param;
     // 服务器端参数和插件参数相互转换

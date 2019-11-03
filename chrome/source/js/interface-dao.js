@@ -31,10 +31,6 @@ function getInterfaceFromHtml(inter) {
 function drawInterfaceDAO(response, moduleId) {
     var interfaceText = "";
     var interfaces = response.data;
-    if (response.success == 0){
-        alert("错误：" + response.error.message + "（" + response.error.code + "）", 5, "error");
-        return;
-    }
     tip(response, 3, "接口加载成功！");
     for (var j = 0; j < interfaces.length; j++) {
         var interface = interfaces[j];
