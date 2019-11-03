@@ -145,6 +145,7 @@ function selectInterface(interfaceId) {
     // 将当前页面数据存入变量，便于下次恢复
 
     $(".interface-title").removeClass("bg-main");
+
     if ($("#" + interfaceTitleDivId).length > 0){
         $("#" + interfaceTitleDivId).addClass("bg-main");
 
@@ -153,7 +154,7 @@ function selectInterface(interfaceId) {
         saveLocalData(DATA_INTERFACE_TEMP + $("#" + ID_INTERFACE_ID).val(), JSON.stringify(inter));
 
         inter = getLocalJson(DATA_INTERFACE_TEMP + interfaceId, "{}");
-        drawInterface(inter);
+        drawInterface(inter, interfaceId);
     } else {
         var deferred = getInterfaceDAO(interfaceId);
         $.when(deferred.promise()).then(function(data){
@@ -165,12 +166,12 @@ function selectInterface(interfaceId) {
 
             var interTitleHtmlList = $("#" + ID_INTERFACE_TITLES).html();
             $("#" + ID_INTERFACE_TITLES).html(interTitleHtmlList + (interfaceTitleDiv.replace(/ca_id/g,inter.id).replace(/ca_name/g,inter.name)));
-            drawInterface(inter);
+            drawInterface(inter, interfaceId);
         });
     }
 }
 
-function drawInterface(inter) {
+function drawInterface(inter, interfaceId) {
     setValue(ID_URL, inter.url);
     setValue(ID_INTERFACE_ID, inter.id)
     setValue(ID_MODULE_ID, inter.moduleId)

@@ -30,6 +30,19 @@ $(function(){
         $("#" + ID_INTERFACE_DIV).removeClass("none");
         $("#" + ID_WELCOME).addClass("none");
 
+        // title
+        $(".interface-title").removeClass("bg-main");
+        $(".history-div").removeClass("bg-main");
+        $(this).addClass("bg-main");
+
+        var interfaceTitleDivId = ID_INTERFACE_TITLE + "-1";
+        if ($("#" + interfaceTitleDivId).length > 0) {
+            $("#" + interfaceTitleDivId).addClass("bg-main");
+        }else {
+            var interTitleHtmlList = $("#" + ID_INTERFACE_TITLES).html();
+            $("#" + ID_INTERFACE_TITLES).html(interTitleHtmlList + (interfaceTitleDiv.replace(/ca_id/g,"-1").replace(/ca_name/g, "历史调试记录")));
+        }
+
         var urlInfo = $.parseJSON( $(this).attr("crap-data") );
         setValue(ID_URL, urlInfo.url);
         setValue(ID_INTERFACE_ID, "-1");
@@ -52,10 +65,6 @@ $(function(){
             $("#customer-value").val(urlInfo.params);
         }
         $("input[name='param-type']").change();
-
-
-        $(".history-div").removeClass("bg-main");
-        $(this).addClass("bg-main");
     });
 
 
