@@ -6,7 +6,7 @@ function queryModuleDAO(defaultProjectId, callBack){
 function drawModuleDAO(response){
     tip(response, 5);
     if (response.success == 0){
-        alert("错误码：" + response.error.code + "，错误信息" + response.error.message, 5, "error");
+        alert("错误：" + response.error.message + "（" + response.error.code + "）", 5, "error");
         return;
     }
 

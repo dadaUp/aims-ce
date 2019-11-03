@@ -329,13 +329,13 @@ function alert(tipMessage, tipTime, isSuccess, width){
 	if(tipMessage!=""){
 		if(tipMessage!="false"&&tipMessage!=false) {
             $("#alert-div").html(tipMessage);
-            if (tipMessage.length > 35){
-                width = 300;
+            if (tipMessage.length > 20){
+                width = 320;
             }
-            if (tipMessage.length > 75){
+            if (tipMessage.length > 50){
                 width = 500;
             }
-            if (tipMessage.length > 150){
+            if (tipMessage.length > 100){
                 width = 800;
             }
         }
