@@ -53,11 +53,11 @@ function getNewInterface() {
         "paramType": null,
         "moduleId": null,
         "id": "-1",
-        "name": null,
-        "method": null,
-        "url": null,
-        "params": null,
-        "headers": null
+        "name": "",
+        "method": "POST",
+        "url": "",
+        "params": "",
+        "headers": ""
     };
 }
 

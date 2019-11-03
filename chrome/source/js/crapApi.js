@@ -35,6 +35,11 @@ $(function(){
         $(".history-div").removeClass("bg-main");
         $(this).addClass("bg-main");
 
+        var inter = getNewInterface();
+
+        inter = getInterfaceFromHtml(inter);
+        saveLocalData(DATA_INTERFACE_TEMP + $("#" + ID_INTERFACE_ID).val(), JSON.stringify(inter));
+
         var interfaceTitleDivId = ID_INTERFACE_TITLE + "-1";
         if ($("#" + interfaceTitleDivId).length > 0) {
             $("#" + interfaceTitleDivId).addClass("bg-main");

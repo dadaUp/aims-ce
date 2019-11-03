@@ -135,6 +135,30 @@ $(".key-value-edit").click(function(){
 });
 
 
+$("#new-interface").click(function() {
+    // 切换页面
+    $("#" + ID_INTERFACE_DIV).removeClass("none");
+    $("#" + ID_WELCOME).addClass("none");
+
+    $(".interface-title").removeClass("bg-main");
+
+    var inter = {};
+    saveLocalData(DATA_INTERFACE_TEMP + $("#" + ID_INTERFACE_ID).val(), JSON.stringify( getInterfaceFromHtml(inter)));
+
+    var inter = getNewInterface();
+    var interfaceId = "new";
+    inter.id = interfaceId;
+
+    var interfaceTitleDivId = ID_INTERFACE_TITLE + interfaceId;
+    if ($("#" + interfaceTitleDivId).length > 0) {
+        $("#" + interfaceTitleDivId).addClass("bg-main");
+    }else {
+        var interTitleHtmlList = $("#" + ID_INTERFACE_TITLES).html();
+        $("#" + ID_INTERFACE_TITLES).html(interTitleHtmlList + (interfaceTitleDiv.replace(/ca_id/g, interfaceId).replace(/ca_name/g, "新接口")));
+    }
+    drawInterface(inter, interfaceId);
+});
+
 function selectInterface(interfaceId) {
     // 切换页面
     $("#" + ID_INTERFACE_DIV).removeClass("none");
@@ -143,16 +167,14 @@ function selectInterface(interfaceId) {
     var interfaceTitleDivId = ID_INTERFACE_TITLE + interfaceId;
 
     // 将当前页面数据存入变量，便于下次恢复
+    inter = getInterfaceFromHtml(inter);
+    saveLocalData(DATA_INTERFACE_TEMP + $("#" + ID_INTERFACE_ID).val(), JSON.stringify(inter));
 
     $(".interface-title").removeClass("bg-main");
-
     if ($("#" + interfaceTitleDivId).length > 0){
         $("#" + interfaceTitleDivId).addClass("bg-main");
 
         // 将当前页面数据存储至db
-        inter = getInterfaceFromHtml(inter);
-        saveLocalData(DATA_INTERFACE_TEMP + $("#" + ID_INTERFACE_ID).val(), JSON.stringify(inter));
-
         inter = getLocalJson(DATA_INTERFACE_TEMP + interfaceId, "{}");
         drawInterface(inter, interfaceId);
     } else {

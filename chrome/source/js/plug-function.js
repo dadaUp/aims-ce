@@ -288,6 +288,8 @@ function callAjax() {
         var history = getLocalJson(DATA_HISTORY);
         if(  $.inArray($('input:radio[name="param-type"]:checked').val(), customerTypes) == -1) {
             params = params.replace(/=/g, ":").replace(/&/g,"\n");
+            // 参数被encode了，需处理
+            params = decodeURIComponent(params);
         }
 
         var h  ={"paramType": $("input[name='param-type']:checked").val(), "name": getValue(ID_INTERFACE_NAME),"method":method, "url" : url,

@@ -8,7 +8,8 @@ function getInterfaceDAO(id) {
 }
 
 function getInterfaceFromHtml(inter) {
-    inter.url = getValue(ID_URL)
+    inter.url = getValue(ID_URL);
+    inter.id=getValue(ID_INTERFACE_ID);
     inter.name = getValue(ID_INTERFACE_NAME);
     inter.method = getValue(ID_METHOD);
     inter.paramType = $('input:radio[name="param-type"]:checked').val()
