@@ -38,9 +38,11 @@ $("#id-refresh-project").click(function(){
 // 点击模块，加载模块接口
 $("#modules").on("click",".panel-heading", function() {
     var moduleId = $(this).attr(ATTR_MODULE_ID);
+    var projectId = $(this).attr(ATTR_PROJECT_ID);
+
     var hasInitInterface = getAttr(ID_MODULE_INTERFACE + moduleId, ATTR_HAS_LOAD_INTERFACE);
     if (hasInitInterface && hasInitInterface == "false"){
-        queryInterfaceDAO(moduleId, drawInterfaceDAO, moduleId);
+        queryInterfaceDAO(projectId, moduleId, drawInterfaceDAO);
     }
 });
 

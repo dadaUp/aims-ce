@@ -6,7 +6,7 @@ paramsTr += "<td class='w20'><i class='iconfont'>&#xe69a;</i></td>";
 paramsTr += "</tr>";
 
 var moduleDiv = "<div class='panel panel-info no-radius b0 mt0 left-menu-border-top'>";
-moduleDiv += "      <div class='panel-heading no-radius rel' data-parent='#modules' crap-data-module-id='ca_moduleId'>";
+moduleDiv += "      <div class='panel-heading no-radius rel' data-parent='#modules' crap-data-module-id='ca_moduleId' crap-data-project-id='ca_projectId'>";
 moduleDiv += "          <div class='cursor' data-toggle='collapse' data-parent='#modules' href='#id-panel-ca_moduleId'>";
 moduleDiv += "              <i class='iconfont color-main f16'>&#xe83b;</i>&nbsp;&nbsp;  ca_moduleName";
 moduleDiv += "          </div>";

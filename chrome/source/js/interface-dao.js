@@ -1,6 +1,6 @@
 // 渲染接口
-function queryInterfaceDAO(moduleId, callBack) {
-    httpPost(MY_INTERFACE_LIST_URL, {"moduleId" : moduleId}, true, drawInterfaceDAO, moduleId);
+function queryInterfaceDAO(projectId, moduleId, callBack) {
+    httpPost(MY_INTERFACE_LIST_URL, {"moduleId" : moduleId, "projectId": projectId}, true, drawInterfaceDAO, moduleId);
 }
 
 function getInterfaceDAO(id) {
@@ -48,7 +48,7 @@ function drawInterfaceDAO(response, moduleId) {
         }
     }
     if(interfaces.length == 0){
-        interfaceText = "<div class='interface pl30 pr20 f14 rel'>~尚未创建接口~</div>"
+        interfaceText = "<div class='pl30 pr20 f14 rel'>~尚未创建接口~</div>"
     }
     setHtml(ID_MODULE_INTERFACE + moduleId, interfaceText);
     setAttr(ID_MODULE_INTERFACE + moduleId, ATTR_HAS_LOAD_INTERFACE, true);
