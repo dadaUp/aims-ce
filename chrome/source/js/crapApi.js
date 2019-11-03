@@ -3,10 +3,8 @@ $(function(){
     if (pageName == "debug"){
         // getAdvertisement();
         // 远程获取所有项目列表，TODO bug：只能显示前50条
-        fadeIn(ID_FLOAT, 300);
         queryProjectDAO(drawProjectDAO);
         drawModule();
-        fadeOut(ID_FLOAT, 300);
         getLoginInfoDAO(drawLoginInfoDAO);
     } else if (pageName == "setting"){
         $("#website-url").val(getWebSiteUrl());

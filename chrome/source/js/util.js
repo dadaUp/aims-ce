@@ -133,9 +133,8 @@ function prop(id) {
 
 /********* http *******/
 function httpPost(url, myData, myAsync, callBack, callBackParams){
-    if (myAsync){
-        $("#" + ID_FLOAT).fadeIn(300);
-    }
+    var deferred = $.Deferred();
+    $("#" + ID_FLOAT).fadeIn(300);
     if (url.indexOf("https://") != 0 && url.indexOf("http://") != 0){
         url = getWebSiteUrl() + url;
     }
@@ -179,13 +178,17 @@ function httpPost(url, myData, myAsync, callBack, callBackParams){
                 alert("未知异常，Status:" + responseData.status + "\nStatusText:" + responseData.statusText, 5, "error");
                 result = $.parseJSON("{\"success\":0,\"data\":null,\"error\":{\"code\":\"未知错误\",\"message\":\"未知错误\"}}")
             }
-            if (myAsync) {
-                $("#" + ID_FLOAT).fadeOut(300);
-            }
+            deferred.resolve(result);
         }
+    });
+
+    $.when(deferred.promise()).then(function(data){
+        $("#" + ID_FLOAT).fadeOut(300);
+        result = data;
     });
     return result;
 }
+
 function jsonFormat(txt, tiperror){
     try {
         var txtObj = JSON.parse(txt);
