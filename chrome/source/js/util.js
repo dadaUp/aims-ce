@@ -38,7 +38,7 @@ function setWebSiteUrl(url){
 /************* 插件广告 ****************/
 function getAdvertisement() {
     try {
-        httpPost(ADVERTISEMENT, null, true, getAdvertisementCallback, null);
+        httpPost(ADVERTISEMENT, null, getAdvertisementCallback, null);
     }catch (e){
         console.error(e);
     }
@@ -132,7 +132,7 @@ function prop(id) {
 }
 
 /********* http *******/
-function httpPost(url, myData, myAsync, callBack, callBackParams){
+function httpPost(url, myData, callBack, callBackParams){
     var deferred = $.Deferred();
     $("#" + ID_FLOAT).fadeIn(300);
     if (url.indexOf("https://") != 0 && url.indexOf("http://") != 0){
@@ -143,7 +143,7 @@ function httpPost(url, myData, myAsync, callBack, callBackParams){
     $.ajax({
         type: "POST",
         url: url,
-        async: myAsync,
+        async: true,
         data: myData,
         timeout: httpTimeout,
         beforeSend: function (request) {
@@ -180,18 +180,11 @@ function httpPost(url, myData, myAsync, callBack, callBackParams){
                 alert("未知异常，Status:" + responseData.status + "\nStatusText:" + responseData.statusText, 5, "error");
                 result = $.parseJSON("{\"success\":0,\"data\":null,\"error\":{\"code\":\"未知错误\",\"message\":\"未知错误\"}}")
             }
+            $("#" + ID_FLOAT).fadeOut(300);
             deferred.resolve(result);
         }
     });
-
-    $.when(deferred.promise()).then(function(data){
-        $("#" + ID_FLOAT).fadeOut(300);
-        if (result.success == 0){
-            data = null;
-        }
-        result = data;
-    });
-    return result;
+    return deferred;
 }
 
 function jsonFormat(txt, tiperror){

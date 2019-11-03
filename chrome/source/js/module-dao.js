@@ -1,5 +1,5 @@
 function queryModuleDAO(defaultProjectId, callBack){
-    httpPost(MY_MODULE_URL, {"projectId" : defaultProjectId, "pageSize" : 100}, true, callBack, defaultProjectId);
+    httpPost(MY_MODULE_URL, {"projectId" : defaultProjectId, "pageSize" : 100}, callBack, defaultProjectId);
 }
 
 // 渲染模块列表

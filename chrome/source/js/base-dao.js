@@ -1,5 +1,5 @@
 function getLoginInfoDAO(callBack) {
-    httpPost(INIT_URL, {}, true, callBack);
+    httpPost(INIT_URL, {}, callBack);
 }
 
 function drawLoginInfoDAO(response) {
@@ -12,7 +12,7 @@ function drawLoginInfoDAO(response) {
 }
 
 $("#" + ID_LOGOUT).click(function(){
-    httpPost(LOGOUT_URL, {}, true, drawLogoutDAO);
+    httpPost(LOGOUT_URL, {}, drawLogoutDAO);
 });
 
 function drawLogoutDAO(response) {

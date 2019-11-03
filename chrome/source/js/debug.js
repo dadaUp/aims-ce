@@ -134,8 +134,8 @@ $(".key-value-edit").click(function(){
     $("#"+preId+"-table tbody").append(paramsTr);
 });
 
-function selectInterface(interfaceId) {
 
+function selectInterface(interfaceId) {
     // 切换页面
     $("#" + ID_INTERFACE_DIV).removeClass("none");
     $("#" + ID_WELCOME).addClass("none");
@@ -153,42 +153,47 @@ function selectInterface(interfaceId) {
         saveLocalData(DATA_INTERFACE_TEMP + $("#" + ID_INTERFACE_ID).val(), JSON.stringify(inter));
 
         inter = getLocalJson(DATA_INTERFACE_TEMP + interfaceId, "{}");
-
+        drawInterface(inter);
     } else {
-        inter = adapterGetInterface(getInterfaceDAO(interfaceId));
-        if (inter == null){
-            return;
-        }
-        saveLocalData(DATA_INTERFACE_TEMP + interfaceId, JSON.stringify(inter));
+        var deferred = getInterfaceDAO(interfaceId);
+        $.when(deferred.promise()).then(function(data){
+            if (data.success == 0){
+               return;
+            }
+            inter = adapterGetInterface(data);
+            saveLocalData(DATA_INTERFACE_TEMP + interfaceId, JSON.stringify(inter));
 
-        var interTitleHtmlList = $("#" + ID_INTERFACE_TITLES).html();
-        $("#" + ID_INTERFACE_TITLES).html(interTitleHtmlList + (interfaceTitleDiv.replace(/ca_id/g,inter.id).replace(/ca_name/g,inter.name)));
+            var interTitleHtmlList = $("#" + ID_INTERFACE_TITLES).html();
+            $("#" + ID_INTERFACE_TITLES).html(interTitleHtmlList + (interfaceTitleDiv.replace(/ca_id/g,inter.id).replace(/ca_name/g,inter.name)));
+            drawInterface(inter);
+        });
     }
+}
 
-
+function drawInterface(inter) {
     setValue(ID_URL, inter.url);
     setValue(ID_INTERFACE_ID, inter.id)
     setValue(ID_MODULE_ID, inter.moduleId)
     setValue(ID_INTERFACE_NAME, handerStr(inter.name));
-    if (inter.method.indexOf("POST") >= 0){
+    if (inter.method.indexOf("POST") >= 0) {
         setValue(ID_METHOD, 'POST');
-    }else if (inter.method.indexOf("GET") >= 0){
+    } else if (inter.method.indexOf("GET") >= 0) {
         setValue(ID_METHOD, 'GET');
-    }else{
+    } else {
         setValue(ID_METHOD, inter.method);
     }
 
     $("#" + ID_METHOD).change();
     // TODO 服务器支持paramType 存储
     // key-value键值对输入方法
-    if($.inArray(inter.paramType, customerTypes) == -1){
+    if ($.inArray(inter.paramType, customerTypes) == -1) {
         // 选中参数输入table
         prop(ID_PARAM_TYPE);
         setValue(ID_PARAMS_BULK_VALUE, inter.params);
         $("#params-bulk-edit-div .key-value-edit").click();
     }
     // 自定义参数输入
-    else{
+    else {
         prop(ID_CUSTOMER_TYPE);
         // 下拉选择 id-customer-type-select
         $("#" + ID_CUSTOMER_TYPE_SELECT).val(inter.paramType);
