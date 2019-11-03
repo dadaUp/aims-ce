@@ -1,6 +1,6 @@
 // 渲染接口
 function queryInterfaceDAO(projectId, moduleId, callBack) {
-    httpPost(MY_INTERFACE_LIST_URL, {"moduleId" : moduleId, "projectId": projectId}, true, drawInterfaceDAO, moduleId);
+    httpPost(MY_INTERFACE_LIST_URL, {"moduleId" : moduleId, "projectId": projectId, "pageSize" : 100}, true, drawInterfaceDAO, moduleId);
 }
 
 function getInterfaceDAO(id) {
