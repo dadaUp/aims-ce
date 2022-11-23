@@ -25,7 +25,7 @@ function setHttpTimeout(httpTimeout){
 }
 
 function getWebSiteUrl(){
-    return getLocalData(WEB_SITE_URL, "http://api.crap.cn")
+    return getLocalData(WEB_SITE_URL, "http://localhost:8090");
 }
 function setWebSiteUrl(url){
     if (url != null && (url.indexOf("http://") == 0 || url.indexOf("https://") == 0)){
